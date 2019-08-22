@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <title>LeaderBoard</title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <script>
+      const DAYS_TO_CONSIDER = 7;
+      let totalCounts = 0;
+      let uptoDate = new Date();
+      uptoDate.setDate(uptoDate.getDate() - DAYS_TO_CONSIDER);
+
+      const queryPullRequest = (after = null) => {
+        let xhr = new XMLHttpRequest();
+        xhr.responseType = "json";
+        xhr.open("POST", "https://api.github.com/graphql");
+        //Send the proper header information along with the request
+        xhr.setRequestHeader(
+          "Authorization",
+          "token 80e0b0a632b0309317fe518b1edba1a3e0e1b84f"
+        );
+
+        xhr.onreadystatechange = function() {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            console.log("success!", xhr.response);
+            if (xhr.response) {
+              getTotalCounts(xhr.response.data);
+            }
+          } else {
+            console.log("The request failed!");
+          }
+        };
+
+        xhr.send(
+          JSON.stringify({
+            variables: {
+              offset: after
+            },
+            query:
+              "query($offset:String){user(login:AsminBudha){bio,avatarUrl,company,email,pullRequests(first:100,after: $offset,orderBy: {field: UPDATED_AT, direction: DESC}){edges{cursor,node{title,body,updatedAt}}}}}"
+          })
+        );
+      };
+
+      const countHowManyLiesWithin = (pullRequests, l, r) => {
+        if (l === r) {
+          return l;
+        }
+        const mid = parseInt(l + (r - l) / 2);
+
+        const pullRequestDate = new Date(pullRequests[mid].node.updatedAt);
+        if (pullRequestDate.getTime() >= uptoDate.getTime()) {
+          return countHowManyLiesWithin(pullRequests, mid + 1, r);
+        }
+        return countHowManyLiesWithin(pullRequests, l, mid);
+      };
+
+      const getTotalCounts = data => {
+        let totalCounts = 0;
+        const pullRequests = data.user.pullRequests.edges;
+        const lastPullRequestDate = new Date(
+          pullRequests[pullRequests.length - 1].node.updatedAt
+        );
+        if (lastPullRequestDate.getTime() >= uptoDate.getTime()) {
+          totalCounts += pullRequests.length;
+          if (pullRequests.length >= 100) {
+            queryPullRequest(pullRequests[pullRequests.length - 1].cursor);
+          }
+        }
+        totalCounts += countHowManyLiesWithin(
+          pullRequests,
+          0,
+          pullRequests.length - 1
+        );
+        console.log("total", totalCounts);
+      };
+      queryPullRequest();
+    </script>
+  </body>
+</html>
