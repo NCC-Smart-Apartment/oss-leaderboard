@@ -20,7 +20,7 @@ export const STATES = {
 export const eventQueryGenerator = (events, user) => {
   const variables = {};
   let query =
-    'query($user:String!,:variable_declaration){user(login:$user){login,repositoriesContributedTo{totalCount},:event_type}}';
+        'query($user:String!,:variable_declaration){user(login:$user){login,repositoriesContributedTo{totalCount},:event_type}}';
   let variableDeclaration = '';
   let eventType = '';
 
@@ -52,7 +52,7 @@ export const events = {
       },
     },
     query:
-      'pullRequests(first:100,states:[OPEN,MERGED],after: $pullRequestAfter,orderBy: {field: UPDATED_AT, direction: DESC}){pageInfo {hasNextPage, endCursor},edges{node{updatedAt,state}}}',
+            'pullRequests(first:100,states:[OPEN,MERGED],after: $pullRequestAfter,orderBy: {field: UPDATED_AT, direction: DESC}){pageInfo {hasNextPage, endCursor},edges{node{updatedAt,state}}}',
   },
   issues: {
     variables: {
@@ -64,7 +64,7 @@ export const events = {
       },
     },
     query:
-      'issues(first:100,after: $issueAfter,states:OPEN,orderBy: {field: UPDATED_AT, direction: DESC}){pageInfo {hasNextPage, endCursor},edges{node{updatedAt,state}}}',
+            'issues(first:100,after: $issueAfter,states:OPEN,orderBy: {field: UPDATED_AT, direction: DESC}){pageInfo {hasNextPage, endCursor},edges{node{updatedAt,state}}}',
   },
   issueComments: {
     variables: {
@@ -76,7 +76,7 @@ export const events = {
       },
     },
     query:
-      'issueComments(last:100,before: $issueCommentBefore){pageInfo {hasNextPage, endCursor},edges{node{updatedAt}}}',
+            'issueComments(last:100,before: $issueCommentBefore){pageInfo {hasNextPage, endCursor},edges{node{updatedAt}}}',
   },
 };
 

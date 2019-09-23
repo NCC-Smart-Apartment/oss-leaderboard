@@ -1,23 +1,22 @@
-import { keys } from '../constants';
-
 const json2md = require('json2md');
 
 /**
- * let headers = ["name", "lastname"]
- * let jsonArray = [["Nischal", "Shakya"], ["Avishkar", "KC"]]
- *
- * @param {array} jsonArray
+ * @example generateMarkdown{{
+ *          ["firstName", "lastName"],
+ *          [["Nischal", "Shakya"], ["Avishkar", "KC"]]
+ *      }} => "firstName | lastName \n
+ *             --- | --- \n
+ *         Nischal | Shakya \n
+ *         Avishkar | KC "
+ * @param {array} rows
  * @param {string[]} headers
- * @return firstname | lastname
- --- | ---
- Nischal | Shakya
- Avishkar | KC
+ * @returns {string}
  */
-export async function generateMarkdown(jsonArray, headers) {
+export async function generateMarkdown(rows, headers) {
   return json2md([
     { h1: 'oss-leaderboard' },
     {
-      table: { headers: Object.values(keys), rows: jsonArray },
+      table: { headers: headers, rows: rows },
     },
     { blockquote: 'PR = Pull request' },
   ]);
