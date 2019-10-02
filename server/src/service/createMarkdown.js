@@ -12,7 +12,7 @@ import fs from 'fs';
  * @param {string} fileName
  * @param {string} data
  */
-export async function createMarkdown(fileName, data) {
+export function createMarkdown(fileName, data) {
   fs.writeFile(fileName, data, err => {
     if (err) {
       throw err;

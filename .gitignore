@@ -1,3 +1,4 @@
-/node_modules
-.env
+# Created by .ignore support plugin (hsz.mobi)
+/server/node_modules
+/docu/website/node_modules
 .idea

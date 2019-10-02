@@ -80,8 +80,11 @@ export const events = {
   },
 };
 
-export const fileName = 'oss-leaderboard.md';
+export const FILE_NAME = 'oss-leaderboard.md';
 
+/**
+  * Mapped user event key to custom column
+ */
 export const MAPPED_USER_EVENT = {
   name: 'Name',
   pullRequestsMerged: 'PR Merged',
@@ -92,7 +95,10 @@ export const MAPPED_USER_EVENT = {
   score: 'Score',
 };
 
-export const weight = {
+/**
+ * Assign weight to user event key
+ * */
+export const WEIGHT = {
   pullRequestsMerged: 3,
   pullRequestsOpen: 3,
   issuesOpen: 1,

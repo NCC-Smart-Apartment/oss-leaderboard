@@ -7,9 +7,9 @@ import {
   DAYS_TO_CONSIDER,
   eventQueryGenerator,
   events,
-  fileName, MAPPED_USER_EVENT,
+  FILE_NAME, MAPPED_USER_EVENT,
   QUERY_NAMES,
-  weight,
+  WEIGHT,
 } from './src/constants';
 
 import { getKeys, getValues } from './src/util/keyValue';
@@ -146,7 +146,13 @@ async function init() {
 
       generateMarkdown(leaderBoardValues, MAPPED_USER_EVENT).then(
         contributionData => {
-          createMarkdown(fileName, contributionData);
+          const title = '---\n' +
+            'id: leaderboard\n' +
+            'title: oss-leaderboard\n' +
+            'sidebar_label: leaderboard list\n' +
+            '---\n' + contributionData;
+
+          createMarkdown(FILE_NAME, title);
         },
       );
     });
@@ -164,10 +170,10 @@ async function init() {
  */
 function calculateScore(e) {
   return (
-    e.pullRequestsMerged * weight.pullRequestsMerged +
-    e.pullRequestsOpen * weight.pullRequestsOpen +
-    e.issueComments * weight.issueComments +
-    e.issuesOpen * weight.issuesOpen
+    e.pullRequestsMerged * WEIGHT.pullRequestsMerged +
+    e.pullRequestsOpen * WEIGHT.pullRequestsOpen +
+    e.issueComments * WEIGHT.issueComments +
+    e.issuesOpen * WEIGHT.issuesOpen
   );
 }
 
