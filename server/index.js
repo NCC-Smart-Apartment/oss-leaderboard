@@ -191,9 +191,9 @@ function addScore(leaderBoard) {
 }
 
 /**
- * Retrieve the directory location where markdown will be save
+ * Retrieve the directory location where markdown will be save.
  *
- * @returns string location
+ * @returns String Directory location.
  */
 function getDirectory() {
   const root = process.cwd();
