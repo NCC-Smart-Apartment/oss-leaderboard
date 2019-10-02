@@ -7,7 +7,7 @@ import {
   DAYS_TO_CONSIDER,
   eventQueryGenerator,
   events,
-  FILE_NAME, MAPPED_USER_EVENT,
+  MAPPED_USER_EVENT,
   QUERY_NAMES,
   WEIGHT,
 } from './src/constants';
@@ -152,7 +152,7 @@ async function init() {
             'sidebar_label: leaderboard list\n' +
             '---\n' + contributionData;
 
-          createMarkdown(FILE_NAME, title);
+          createMarkdown(getDirectory(), title);
         },
       );
     });
@@ -191,3 +191,12 @@ function addScore(leaderBoard) {
 }
 
 init();
+
+function getDirectory() {
+  const root = process.cwd();
+  const newPath = root.substr(0, root.lastIndexOf('/'));
+
+  return newPath.concat('/docu/docs/oss-leaderboard.md');
+}
+
+getDirectory();
