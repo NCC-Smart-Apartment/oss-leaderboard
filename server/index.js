@@ -146,13 +146,13 @@ async function init() {
 
       generateMarkdown(leaderBoardValues, MAPPED_USER_EVENT).then(
         contributionData => {
-          const title = '---\n' +
+          const DATA = '---\n' +
             'id: leaderboard\n' +
             'title: oss-leaderboard\n' +
             'sidebar_label: leaderboard list\n' +
             '---\n' + contributionData;
 
-          createMarkdown(getDirectory(), title);
+          createMarkdown(getDirectory(), DATA);
         },
       );
     });
@@ -190,8 +190,11 @@ function addScore(leaderBoard) {
   }));
 }
 
-init();
-
+/**
+ * Retrieve the directory location where markdown will be save
+ *
+ * @returns string location
+ */
 function getDirectory() {
   const root = process.cwd();
   const newPath = root.substr(0, root.lastIndexOf('/'));
@@ -199,4 +202,6 @@ function getDirectory() {
   return newPath.concat('/docu/docs/oss-leaderboard.md');
 }
 
-getDirectory();
+init();
+
+
