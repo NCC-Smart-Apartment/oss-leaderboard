@@ -5,12 +5,18 @@
 }
 
 .headerTitleWithLogo:after{
-    content: "oss-leaderboard";
+    content: "Leapfrog Open Source Leaderboard";
     visibility: visible;
 }
+
+.docMainWrapper.wrapper {
+    margin: 0 auto;
+}
+
 .postHeaderTitle {
     display: none;
 }
+
 
 .navGroup{
     visibility: hidden;
