@@ -2,3 +2,4 @@
 /server/node_modules
 /docu/website/node_modules
 .idea
+/docu/website/build

@@ -14,7 +14,6 @@ const json2md = require('json2md');
  */
 export async function generateMarkdown(rows, headers) {
   return json2md([
-    { h1: 'oss-leaderboard' },
     {
       table: { headers: Object.values(headers), rows: rows },
     },

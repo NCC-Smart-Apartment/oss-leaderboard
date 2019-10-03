@@ -1,5 +1,30 @@
 /* your custom css */
 
+.headerTitleWithLogo {
+    visibility: hidden;
+}
+
+.headerTitleWithLogo:after{
+    content: "oss-leaderboard";
+    visibility: visible;
+}
+.postHeaderTitle {
+    display: none;
+}
+
+.navGroup{
+    visibility: hidden;
+}
+
+.headerWrapper header img {
+    display:none;
+}
+
+.wrapper {
+    width: 100%;
+    margin: 0;
+}
+
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 
