@@ -14,6 +14,9 @@ query ossQuery($timedelta: DateTime!, $username: String!, $dataCount: Int!, $iss
       edges {
         cursor
         node {
+          pullRequest {
+            id
+          }
           issue {
             author {
               login

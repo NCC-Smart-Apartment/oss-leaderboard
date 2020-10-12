@@ -135,6 +135,7 @@ def format_issue_comments(
     df: pd.DataFrame,
 ) -> Dict:
 
+    # count of issue comments that were made before timeDelta
     olderDataCount = 0
 
     for issue_comment in issue_comment_list:
@@ -146,20 +147,21 @@ def format_issue_comments(
         last_updated_at = issue_comment["node"]["updatedAt"]
 
         if created_at >= timeDelta:
-            df = df.append(
-                {
-                    "github_id": github_id,
-                    "user_id": user_id,
-                    "user_name": user_name,
-                    "type": contribTypes.T4,
-                    "repo_id": repo_id,
-                    "repo_owner_id": repo_owner_id,
-                    "reactions": reactions,
-                    "created_at": created_at,
-                    "last_updated_at": last_updated_at,
-                },
-                ignore_index=True,
-            )
+            if issue_comment["node"]["pullRequest"] == None:
+                df = df.append(
+                    {
+                        "github_id": github_id,
+                        "user_id": user_id,
+                        "user_name": user_name,
+                        "type": contribTypes.T4,
+                        "repo_id": repo_id,
+                        "repo_owner_id": repo_owner_id,
+                        "reactions": reactions,
+                        "created_at": created_at,
+                        "last_updated_at": last_updated_at,
+                    },
+                    ignore_index=True,
+                )
         else:
             olderDataCount += 1
 
